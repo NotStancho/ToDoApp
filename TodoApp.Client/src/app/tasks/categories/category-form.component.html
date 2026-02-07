@@ -1,0 +1,35 @@
+<form [formGroup]="form" [ngClass]="formClass" (ngSubmit)="onSubmit($event)">
+  <input
+    #input
+    [class]="inputClass"
+    type="text"
+    [placeholder]="placeholder"
+    formControlName="name"
+    (keydown.enter)="inputEnter.emit()"
+    (keydown.escape)="inputEscape.emit()"
+  />
+
+  @if (showValidation && form.controls['name'].touched && form.controls['name'].invalid) {
+    <div class="text-xs text-danger-600">{{ validationMessage }}</div>
+  }
+
+  @if (showActions) {
+    <div class="mt-2 flex justify-end gap-2">
+      <button
+        type="button"
+        class="rounded-lg px-3 py-1.5 text-sm font-semibold text-ink-500 hover:bg-sand-50"
+        (click)="cancel.emit()"
+      >
+        {{ cancelLabel }}
+      </button>
+
+      <button
+        type="submit"
+        class="rounded-lg bg-ink-900 px-3 py-1.5 text-sm font-semibold text-white disabled:opacity-60"
+        [disabled]="disableSubmit"
+      >
+        {{ submitLabel }}
+      </button>
+    </div>
+  }
+</form>

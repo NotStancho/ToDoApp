@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+
+  /* Ink */
+  --color-ink-900: #0b1324;
+  --color-ink-700: #1f2a44;
+  --color-ink-500: #33486b;
+
+  /* Brand */
+  --color-mint-600: #1b9c8b;
+  --color-mint-500: #22b8a7;
+  --color-amber-500: #f2a45a;
+
+  /* Surfaces */
+  --color-sand-50: #f6f2ed;
+  --color-card: rgba(255, 255, 255, 0.9);
+  --color-surface: rgba(255, 255, 255, 0.95);
+  --color-hero: rgba(255, 255, 255, 0.65);
+  --color-stroke: rgba(15, 23, 42, 0.12);
+
+  /* Danger */
+  --color-danger-600: #b42318;
+  --color-danger-700: #8a1f16;
+
+  /* Shadows */
+  --shadow-card: 0 24px 60px rgba(15, 23, 42, 0.18);
+  --shadow-cta: 0 12px 24px rgba(27, 156, 139, 0.25);
+  --shadow-focus: 0 0 0 3px rgba(27, 156, 139, 0.15);
+  --shadow-panel: 0 -4px 12px -6px rgba(0, 0, 0, 0.1);
+  --shadow-danger-focus: 0 0 0 3px rgba(180, 35, 24, 0.16);
+}
+
+@layer utilities {
+  .animate-modal-backdrop {
+    animation: modal-fade 150ms ease-out;
+  }
+
+  .animate-modal {
+    animation: modal-zoom 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .toast-enter {
+    animation: toast-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .toast-exit {
+    animation: toast-out 160ms ease-in forwards;
+  }
+
+  .popover-panel {
+    animation: popover-in 120ms ease-out;
+    transform-origin: top right;
+  }
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans), sans-serif;
+    color: var(--color-ink-900);
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(900px 600px at 15% -10%, rgba(34, 184, 167, 0.22), transparent 60%),
+      radial-gradient(900px 600px at 90% 10%, rgba(242, 164, 90, 0.28), transparent 65%),
+      linear-gradient(135deg, #f5f2ec 0%, #eef4f5 40%, #fbf7ee 100%);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display), sans-serif;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* Modal */
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Toast */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+}
+
+/* Popover */
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(31, 42, 68, 0.18);;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(27, 156, 139, 0.45);
+}

@@ -1,0 +1,21 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=TodoApp;"
+  },
+  "Jwt": {
+    "Key": "CHANGE_ME_TO_RANDOM_256_BIT_KEY",
+    "Issuer": "TodoApp",
+    "Audience": "TodoApp",
+    "ExpiresMinutes": 60
+  },
+  "Frontend": {
+    "Url": "http://localhost:4200"
+  },
+  "AllowedHosts": "*"
+}

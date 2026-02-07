@@ -1,0 +1,63 @@
+<div class="h-screen overflow-hidden p-4">
+  <div class="flex h-full min-h-0 flex-col gap-2">
+    <div
+      class="grid min-h-0 flex-1 gap-4 transition-[grid-template-columns] duration-300 ease-out
+      grid-cols-1
+      md:grid-cols-[clamp(280px,26vw,340px)_1fr]
+      xl:grid-cols-[clamp(300px,24vw,360px)_minmax(0,420px)_minmax(0,1fr)]
+      "
+    >
+    <div class="min-h-0 h-full">
+        <app-tasks-sidebar
+          [user]="user()"
+          [categories]="categories()"
+          [recentTasks]="recentTasks()"
+          [loadingCategories]="loadingCategories()"
+          [loadingRecent]="loadingRecent()"
+          [selectedTaskId]="selectedTaskId()"
+          [categoryForm]="categoryForm"
+          [categoryEditForm]="categoryEditForm"
+          [editingCategoryId]="editingCategoryId()"
+          [savingCategory]="savingCategory()"
+          [savingCategoryId]="savingCategoryId()"
+          [categoryFilter]="tasksFacade.categoryFilter()"
+          (categoryChange)="onCategoryChange($event)"
+          (selectTask)="selectTask($event)"
+
+          (addCategory)="addCategory()"
+          (editCategory)="onEditCategory($event)"
+          (saveEditCategory)="onSaveEditCategory()"
+          (cancelEditCategory)="onCancelEditCategory()"
+          (deleteCategory)="deleteCategory($event)"
+        />
+      </div>
+
+      <div class="min-h-0 h-full">
+        <app-tasks-list
+          [tasks]="tasks()"
+          [loading]="loadingTasks()"
+          [selectedTaskId]="selectedTaskId()"
+          [filtersForm]="filtersForm"
+          (selectTask)="selectTask($event)"
+          (toggleComplete)="toggleComplete($event)"
+          (pageChange)="changePage($event)"
+          (createTask)="startCreateTask()"
+          (statusChange)="setStatus($event)"
+        />
+      </div>
+
+      @if (hasDetails()) {
+        <div class="min-h-0 h-full">
+          <app-task-details
+            [task]="selectedTaskDetails()"
+            [categories]="categories()"
+            [isCreating]="isCreatingTask()"
+            (create)="createTask($event)"
+            (update)="updateTask($event)"
+            (delete)="deleteTask(selectedTaskId()!)"
+          />
+        </div>
+      }
+    </div>
+  </div>
+</div>

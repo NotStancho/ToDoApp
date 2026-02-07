@@ -1,0 +1,42 @@
+<div class="relative">
+  <!-- trigger -->
+  <button
+    #btn
+    type="button"
+    class="flex w-full items-center justify-between
+           rounded-xl border border-stroke
+           bg-white px-3 py-2
+           text-base text-ink-900
+           shadow-sm
+           focus:border-mint-600/60 focus:shadow-focus focus:outline-none"
+    (click)="open(btn, dropdownTpl)"
+  >
+    <span class="truncate">
+      {{ selectedLabel }}
+    </span>
+
+    <svg class="h-4 w-4 text-ink-500/60" viewBox="0 0 20 20" fill="currentColor">
+      <path
+        fill-rule="evenodd"
+        d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.4a.75.75 0 01-1.08 0l-4.25-4.4a.75.75 0 01.02-1.06z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  </button>
+
+  <ng-template #dropdownTpl>
+    <div class="w-full overflow-hidden rounded-xl border border-stroke bg-white shadow-card popover-panel">
+      @for (opt of options; track opt.id) {
+        <button
+          class="flex w-full px-3 py-2 text-left text-sm
+                 hover:bg-sand-50
+                 transition"
+          [ngClass]="opt.id === value ? 'bg-mint-500/10' : ''"
+          (click)="select(opt.id)"
+        >
+          {{ opt.label }}
+        </button>
+      }
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,18 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+*.csproj.user
+
+# .NET
+bin/
+obj/
+.vs/
+
+# Angular
+node_modules/
+dist/
+
+
+# Secrets / local config
+appsettings.json

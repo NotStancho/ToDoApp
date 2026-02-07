@@ -1,0 +1,91 @@
+<main class="flex h-full min-h-0 flex-col overflow-y-auto rounded-3xl border border-stroke bg-card p-6 shadow-card backdrop-blur">
+  <div class="flex items-center justify-between">
+    <div>
+      <p class="text-xs uppercase tracking-[0.18em] text-ink-500">Task details</p>
+      <h2 class="text-2xl font-semibold text-ink-900">
+        {{ isCreating ? 'New task' : (task ? 'Details' : 'Select a task') }}
+      </h2>
+    </div>
+    @if (task) {
+      <app-button
+        variant="danger"
+        size="md"
+        (click)="delete.emit()"
+      >
+        Delete
+      </app-button>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="mt-6 text-sm text-ink-500">Loading details...</div>
+  } @else if (!task && !isCreating) {
+    <div class="mt-6 text-sm text-ink-500">
+      Select a task to view full content, or create a new one.
+    </div>
+  } @else {
+    <form class="mt-6 space-y-4" [formGroup]="form" (ngSubmit)="$event.preventDefault()">
+      <label class="flex flex-col gap-2 text-sm font-semibold text-ink-700">
+        Title
+        <app-input
+          [control]="form.controls['title']"
+          placeholder="Task title"
+          autocomplete="off"
+        />
+        @if (form.controls['title'].touched && form.controls['title'].invalid) {
+          <span class="text-sm text-danger-600">Title must be 2–200 characters.</span>
+        }
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-ink-700">
+        Category
+        <app-select
+          [options]="categoryOptions"
+          [value]="form.controls['categoryId'].value"
+          placeholder="Select category"
+          (change)="onCategoryChange($event)"
+        />
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-ink-700">
+        Description
+        <app-textarea
+          [control]="form.controls['description']"
+          placeholder="Optional details"
+        ></app-textarea>
+      </label>
+
+      <label class="flex items-center gap-3 text-sm font-semibold text-ink-700">
+        <input
+          type="checkbox"
+          formControlName="isCompleted"
+          class="h-4 w-4 rounded border-stroke"
+        />
+        {{ form.value.isCompleted ? 'Completed' : 'Active' }}
+      </label>
+
+      <div class="rounded-2xl border border-stroke bg-sand-50/60 p-4 text-sm text-ink-500">
+        <div class="flex items-center justify-between">
+          <span>Created</span>
+          <span>
+            {{
+              task?.createdAt
+                ? (task?.createdAt | date:'medium')
+                : '–'
+            }}
+          </span>
+        </div>
+        <div class="mt-2 flex items-center justify-between">
+          <span>Updated</span>
+          <span>
+            {{
+              task?.updatedAt
+                ? (task?.updatedAt | date:'medium')
+                : '–'
+            }}
+          </span>
+        </div>
+      </div>
+    </form>
+  }
+</main>

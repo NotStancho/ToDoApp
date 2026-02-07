@@ -1,0 +1,70 @@
+<app-auth-layout>
+  <section hero class="rounded-[28px] border border-stroke bg-hero px-11 py-10 shadow-card backdrop-blur-[6px]">
+    <span class="auth-badge">ToDo</span>
+    <h1 class="mt-6 text-4xl leading-tight">
+      Turn daily tasks into focused progress.
+    </h1>
+    <p class="mt-3 text-ink-500">
+      Plan, track, and finish tasks without the distractions.
+    </p>
+
+    <ul class="mt-6 grid list-none gap-3 p-0">
+      <li class="flex items-center gap-2.5 font-semibold text-ink-700">
+        <span class="h-3 w-3 rounded-full bg-linear-to-br from-mint-500 to-amber-500"></span>
+        Smart categories with instant filtering
+      </li>
+      <li class="flex items-center gap-2.5 font-semibold text-ink-700">
+        <span class="h-3 w-3 rounded-full bg-linear-to-br from-mint-500 to-amber-500"></span>
+        Quick search across titles
+      </li>
+      <li class="flex items-center gap-2.5 font-semibold text-ink-700">
+        <span class="h-3 w-3 rounded-full bg-linear-to-br from-mint-500 to-amber-500"></span>
+        Stay in sync with a secure account
+      </li>
+    </ul>
+
+    <div class="mt-6 text-sm text-ink-500">Designed for a fast, reliable experience.</div>
+  </section>
+
+  <section card class="rounded-3xl border border-stroke bg-card p-9 shadow-card backdrop-blur-[6px]">
+    <h2 class="text-[2rem]">Welcome back</h2>
+    <p class="mt-3 text-ink-500">Pick up where you left off.</p>
+
+    <form class="mt-6" [formGroup]="form" (ngSubmit)="submit()">
+      <app-form-field
+        label="Email"
+        inputId="email"
+        type="email"
+        autocomplete="email"
+        placeholder="you@email.com"
+        [control]="form.controls.email"
+        errorText="Enter a valid email address."
+      />
+
+      <app-form-field
+        label="Password"
+        inputId="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Your password"
+        [control]="form.controls.password"
+        errorText="Password must be at least 6 characters."
+      />
+
+      @let loading = auth.loading$ | async;
+      <app-button
+        className="mt-6 w-full"
+        variant="primary"
+        size="lg"
+        type="submit"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Opening workspace...' : 'Log in' }}
+      </app-button>
+    </form>
+
+    <div class="mt-6 text-[0.95rem] text-ink-500">
+      New here? <a class="font-semibold text-mint-600" routerLink="/register">Create an account</a>
+    </div>
+  </section>
+</app-auth-layout>

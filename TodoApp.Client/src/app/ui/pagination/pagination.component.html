@@ -1,0 +1,23 @@
+<div class="flex items-center justify-between text-sm text-ink-500">
+  <button
+    class="rounded-full border border-stroke px-3 py-1 font-semibold text-ink-700 disabled:opacity-50"
+    type="button"
+    (click)="prev.emit()"
+    [disabled]="page <= 1 || loading"
+  >
+    Prev
+  </button>
+
+  <span class="text-ink-500">
+    Page {{ page }} / {{ totalPages }}
+  </span>
+
+  <button
+    class="rounded-full border border-stroke px-3 py-1 font-semibold text-ink-700 disabled:opacity-50"
+    type="button"
+    (click)="next.emit()"
+    [disabled]="page >= totalPages || loading"
+  >
+    Next
+  </button>
+</div>
